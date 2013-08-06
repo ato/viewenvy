@@ -64,7 +64,7 @@ with the appropriate content:
 
 ```html
 <script>
-  documemt.getElementById("future17").outerHTML = "You have 17 tokens remaining.";
+  document.getElementById("future17").outerHTML = "You have 32 tokens remaining.";
 </script>
 ```
 
