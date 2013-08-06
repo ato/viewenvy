@@ -46,9 +46,85 @@ Asynchronous Content Blocks
 
 * TODO: describe async helper
 
-Configuration
--------------
+Usage
+-----
 
-* TODO: Standalone
-* TODO: JAX-RS example
-* TODO: Spring MVC example
+### Configuration
+
+You'll always need to construct a ViewEnvy object:
+
+```java
+ViewEnvy views = new ViewEnvy();
+```
+
+You might like to give ViewEnvy a prefix and suffix to use when searching for templates on the classpath. Doing
+so means you can use `views.render("home")` rather than `views.render("myapp/views/home.gsp")`:
+
+```
+views.setPrefix("myapp/views/");
+views.setSuffix(".gsp");
+```
+
+By default the helpers in ViewEnvy.DEFAULT_HELPERS are available, but you might to like specify your own 
+set of helper classes to use:
+
+```java
+Set<Class> helpers = new HashSet<>();
+helpers.addAll(ViewEnvy.DEFAULT_HELPERS);
+helpers.add(MyHelper.class);
+helpers.add(org.apache.commons.lang3.text.WordUtils.class);
+views.setHelpers(helpers);
+```
+
+### Standalone
+
+ViewEnvy can be used standalone without any web-framework. Here's an example of rendering a view 
+to `System.out`:
+
+```
+Writer out = new OutputStreamWriter(System.out);
+
+Map model = new HashMap();
+model.put("title", "Pudd'nhead Wilson");
+model.put("author", "Mark Twain");
+
+views.render("home", model, out);
+```
+
+### JAX-RS
+
+ViewEnvy includes a MessageBodyWriter provider for use with JAX-RS. To use it return register ModelAndViewWriter
+with your JAX-RS implementation:
+
+```java
+class MyApplication extends Application {
+    final Set<Object> singletons = new HashSet<>();
+    
+    public MyApplication() {
+        ViewEnvy views = new ViewEnvy();
+        views.setPrefix("myapp/views/");
+        views.setSuffix(".gsp");
+        singletons.add(new ModelAndViewWriter(views));
+    }
+    
+    public getSingletons() {
+        return singletons;
+    }
+}
+```
+
+Then in your controllers return a ViewEnvy ModelAndView object:
+
+```java
+@GET
+@Pah("/")
+public ModelAndView homepage() {
+    Map model = new HashMap();
+    model.put("title", "My blog!");
+    return new ModelAndView("home", model);
+}
+```
+
+### Spring MVC
+
+TODO: example
