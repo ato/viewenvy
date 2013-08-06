@@ -36,11 +36,12 @@ Helpers
 * TODO: describe render helper
 * TODO: describe yield, provide and contentFor helpers
 
-### Future helper for asynchronous rendering
+### Future rendering
 
 Sometimes there's a slow section of your page that's holding up rendering. Perhaps it needs to perform
-some complex calculation or talk to a third party web service. You could use an AJAX request, but
-ViewEnvy provides another alternative, the future helper:
+some complex calculation or talk to a third party web service. You could use an AJAX request to run
+the slow query asynchronously, but ViewEnvy provides an easier alternative, the future helper:
+
 ```jsp
 <% future { %>
     You have <%= db.slowQuery() %> tokens remaining.
@@ -56,7 +57,7 @@ processing the rest of the page:
 It schedules the content block for processing in a background threadpool. Once ViewEnvy finishes the
 rest of the page it will flush to the browser and wait for any running futures. As each future
 finishes ViewEasy will tack some JavaScript on the end of the page that replaces the placheholder div
-with the result:
+with the appropriate content:
 
 ```html
 <script>
