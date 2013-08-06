@@ -41,13 +41,14 @@ Helpers
 
 Sometimes there's a slow section of your page that's holding up rendering. Perhaps it needs to perform
 some complex calculation or talk to a third party web service. You could use an AJAX request to run
-the slow query asynchronously, but ViewEnvy provides an easy alternative, the future helper:
+the slow query asynchronously but ViewEnvy provides an easy alternative:
 
 ```jsp
 <% future { %>
     You have <%= db.slowQuery() %> tokens remaining.
 <% } %>
 ```
+
 The future helper writes a placeholder div with the class you specified and immediately continues
 processing the rest of the page:
 
