@@ -49,15 +49,14 @@ the slow query asynchronously but ViewEnvy provides an easy alternative:
 <% } %>
 ```
 
-The future helper writes a placeholder div with the class you specified and immediately continues
-processing the rest of the page:
+The future helper writes a placeholder div with the class you specified, schedules the content block
+for background processing on a thread pool and immediately continues rendering the rest of the template:
 
 ```html
 <div id="future17"></div>
 ```
 
-It schedules the content block for processing on a background thread. Once ViewEnvy finishes the
-rest of the page it will flush to the browser and wait for any running futures. As each future
+Once ViewEnvy finishes the template it will flush to the browser and wait for any running futures. As each future
 finishes ViewEasy will tack some JavaScript on the end of the page that replaces the placheholder div
 with the appropriate content:
 
