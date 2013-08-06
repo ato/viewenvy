@@ -31,20 +31,59 @@ Helpers
 * TODO: describe how to write a helper
 * TODO: example of using a random Java utility library as a helper
 
-Partials
---------
+### Partials and Layouts
 
 * TODO: describe render helper
-
-Layouts
--------
-
 * TODO: describe yield, provide and contentFor helpers
 
-Asynchronous Content Blocks
---------------------------
+### Future helper for asynchronous rendering
 
-* TODO: describe async helper
+Sometimes there's a slow section of your page that's holding up rendering. Perhaps it needs to perform
+some complex calculation or talk to a third party web service. You could use an AJAX request, but
+ViewEnvy provides another alternative, the future helper:
+
+```jsp
+<% future { %>
+    You have <%= db.slowQuery() %> tokens remaining.
+<% } %>
+```
+
+The future helper writes a placeholder div with the class you specified and immediately continues
+processing the rest of the page:
+
+```html
+<div id="future17"></div>
+```
+
+It schedules the content block for processing in a background threadpool. Once ViewEnvy finishes the
+rest of the page it will flush to the browser and wait for any running futures. As each future
+finishes ViewEasy will tack some JavaScript on the end of the page that replaces the placheholder div
+with the result:
+
+```html
+<script>
+  documemt.getElementById("async17").outerHTML = "You have 17 tokens remaining.";
+</script>
+```
+
+You can pass a CSS class to `future` for styling the placeholder:
+
+```jsp
+<% future("loading") { %> ... <% } %>
+```
+
+Outputs:
+
+```html
+<div id="future18" class="loading"></div>
+```
+
+Which you could perhaps style:
+
+```css
+.loading       { background-image: url('throbber.gif'); height: 25px; width: 25px; }
+.loading:after { content: "Loading..." }
+```
 
 Usage
 -----
