@@ -3,9 +3,9 @@ ViewEnvy
 
 ViewEnvy provides Rails-style views for Java web applications using Groovy as an expression language. Highlights:
 
-* Simple static method helpers (with block syntax!) not tag libraries
+* Simple static method helpers (with block syntax!)
 * Partials with `provide` and `contentFor`
-* Asynchronous template blocks
+* Asynchronous content blocks
 
 Syntax
 ------
