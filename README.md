@@ -45,7 +45,7 @@ the slow query asynchronously but ViewEnvy provides an easy alternative:
 
 ```jsp
 <% future { %>
-    You have ${ db.slowQuery() } tokens remaining.
+    You have ${db.slowQuery()} tokens remaining.
 <% } %>
 ```
 
