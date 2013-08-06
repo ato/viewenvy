@@ -44,13 +44,13 @@ some complex calculation or talk to a third party web service. You could use an 
 the slow query asynchronously but ViewEnvy provides an easy alternative:
 
 ```jsp
-<% future { %>
+<%= future { %>
     You have ${db.slowQuery()} tokens remaining.
 <% } %>
 ```
 
-The future helper writes a placeholder div with the class you specified, schedules the content block
-for background processing on a thread pool and immediately continues rendering the rest of the template:
+The future helper writes a placeholder div, schedules the content block for background processing
+on a thread pool and immediately continues rendering the rest of the template:
 
 ```html
 <div id="future17"></div>
@@ -74,7 +74,7 @@ You can also specify a CSS class name for styling the placeholder div:
   .loading:after { content: "Loading..." }
 </style>
 
-<% future("loading") { %> ... <% } %>
+<%= future("loading") { %> ... <% } %>
 ```
 
 Usage
