@@ -58,7 +58,7 @@ on a thread pool and immediately continues rendering the rest of the template:
 ```
 
 Once ViewEnvy finishes the template it will flush to the browser and wait for any running futures. As each future
-finishes ViewEasy will tack some JavaScript on the end of the page that replaces the placheholder div
+finishes ViewEasy will tack a script tag on the end of the page that replaces the placheholder div
 with the appropriate content:
 
 ```html
