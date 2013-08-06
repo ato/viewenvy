@@ -22,8 +22,9 @@ Here's an example:
 ```
 
 There is no special ViewEnvy expression language or tag/helper syntax. Those features are accompolished
-with standard Groovy syntax. For the most part you can treat Groovy just like Javawith a couple of useful
-shortcuts like writing `page.article.title` instead of `page.getArticle().getTitle()`.
+with [standard Groovy syntax](http://groovy.codehaus.org/User+Guide). For the most part you can treat 
+Groovy just like Java with some optional sugar like being able to write `page.article.title` in place 
+of `page.getArticle().getTitle()`.
 
 Helpers
 -------
@@ -40,7 +41,7 @@ Helpers
 
 Sometimes there's a slow section of your page that's holding up rendering. Perhaps it needs to perform
 some complex calculation or talk to a third party web service. You could use an AJAX request to run
-the slow query asynchronously, but ViewEnvy provides an easier alternative, the future helper:
+the slow query asynchronously, but ViewEnvy provides an easy alternative, the future helper:
 
 ```jsp
 <% future { %>
@@ -54,7 +55,7 @@ processing the rest of the page:
 <div id="future17"></div>
 ```
 
-It schedules the content block for processing in a background threadpool. Once ViewEnvy finishes the
+It schedules the content block for processing on a background thread. Once ViewEnvy finishes the
 rest of the page it will flush to the browser and wait for any running futures. As each future
 finishes ViewEasy will tack some JavaScript on the end of the page that replaces the placheholder div
 with the appropriate content:
@@ -65,7 +66,7 @@ with the appropriate content:
 </script>
 ```
 
-You can pass a CSS class name to `future` to style the placeholder div:
+You can also specify a CSS class name for styling the placeholder div:
 
 ```jsp
 <style>
