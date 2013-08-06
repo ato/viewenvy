@@ -62,7 +62,7 @@ with the appropriate content:
 
 ```html
 <script>
-  documemt.getElementById("async17").outerHTML = "You have 17 tokens remaining.";
+  documemt.getElementById("future17").outerHTML = "You have 17 tokens remaining.";
 </script>
 ```
 
