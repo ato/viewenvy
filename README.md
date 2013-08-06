@@ -41,13 +41,11 @@ Helpers
 Sometimes there's a slow section of your page that's holding up rendering. Perhaps it needs to perform
 some complex calculation or talk to a third party web service. You could use an AJAX request, but
 ViewEnvy provides another alternative, the future helper:
-
 ```jsp
 <% future { %>
     You have <%= db.slowQuery() %> tokens remaining.
 <% } %>
 ```
-
 The future helper writes a placeholder div with the class you specified and immediately continues
 processing the rest of the page:
 
@@ -66,23 +64,15 @@ with the result:
 </script>
 ```
 
-You can pass a CSS class to `future` for styling the placeholder:
+You can pass a CSS class name to `future` to style the placeholder div:
 
 ```jsp
+<style>
+  .loading       { background-image: url('throbber.gif'); height: 25px; width: 25px; }
+  .loading:after { content: "Loading..." }
+</style>
+
 <% future("loading") { %> ... <% } %>
-```
-
-Outputs:
-
-```html
-<div id="future18" class="loading"></div>
-```
-
-Which you could perhaps style:
-
-```css
-.loading       { background-image: url('throbber.gif'); height: 25px; width: 25px; }
-.loading:after { content: "Loading..." }
 ```
 
 Usage
